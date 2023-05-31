@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import useBoundStore from "../../store/Store";
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantine/ds';
+import {SwitchToggle} from "./ToogleMode";
 import {
   createStyles,
   Header,
@@ -161,6 +162,7 @@ function Navbar() {
         <MantineLogo size={28} />
         <Group spacing={5} className={classes.links}>
           {items}
+          <SwitchToggle/>
         </Group>
 
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
@@ -169,10 +171,14 @@ function Navbar() {
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
               {items}
+              <SwitchToggle/>
             </Paper>
           )}
+          
         </Transition>
+        
       </Container>
+      
     </Header>
   );
 }
