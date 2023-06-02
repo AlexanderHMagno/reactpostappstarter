@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function ArticleCardImage({ title, category, image, id }) {
+export function ArticleCardImage({ title, category, image, id, individual }) {
   const { classes } = useStyles();
   return (
     <Paper
@@ -47,9 +47,14 @@ export function ArticleCardImage({ title, category, image, id }) {
           {title}
         </Title>
       </div>
-      <Button variant="white" color="dark">
-        <Link to={id.toString()}>View</Link>
-      </Button>
+  
+      {!individual && 
+        <Link to={id.toString()}>
+            <Button variant="white" color="dark">
+              View
+            </Button>
+        </Link>
+      }
     </Paper>
   );
 }

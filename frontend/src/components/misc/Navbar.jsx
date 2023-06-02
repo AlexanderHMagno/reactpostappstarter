@@ -147,7 +147,7 @@ function Navbar() {
   }, [user]);
 
   const items = links.map((link, idx) => 
-    {return link.visible && (<NavLink to={link.link} onClick={() => handleClick(link.label,link.action)} >
+    {return link.visible && (<NavLink key={idx} to={link.link} onClick={() => handleClick(link.label,link.action)} >
         <span 
             className={cx(classes.link, { [classes.linkActive]: active === link.label })}
             
