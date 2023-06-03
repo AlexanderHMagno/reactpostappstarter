@@ -2,48 +2,86 @@ import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { useLoaderData, Link } from "react-router-dom";
-import {Button } from "@mantine/core";
+
 import useBoundStore from "../../store/Store";
+import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme, rem, createStyles, Button,  Text, Title  } from '@mantine/core';
+
+
+const useStyles = createStyles((theme) => ({
+  card: {
+    height: rem(440),
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+
+  title: {
+    fontFamily: `Greycliff CF ${theme.fontFamily}`,
+    fontWeight: 900,
+    color: theme.colorScheme,
+    lineHeight: 1.2,
+    fontSize: rem(32),
+    marginTop: theme.spacing.xs,
+    marginBottom: theme.spacing.lg,
+  },
+
+  category: {
+    color: theme.colorScheme,
+    opacity: 0.7,
+    fontWeight: 700,
+    textTransform: "uppercase",
+    marginBottom: theme.spacing.lg
+  },
+
+  content: {
+    textAlign: "center",
+    fontStyle: "italic",
+    marginTop: theme.spacing.lg,
+    fontSize: rem(130)
+  },
+}));
 
 
 
-import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme, rem } from '@mantine/core';
+
+
 
 const PRIMARY_COL_HEIGHT = rem(300);
 
 const PostDetailsPage = () => {
+  const { classes, theme } = useStyles();
   const {user } = useBoundStore((state) => state);
   const post = useLoaderData();
-  const theme = useMantineTheme();
+
+  console.log(theme);
   const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
   const owner = post.userId === user.id;
 
   return (
     <Container my="md">
-      <SimpleGrid cols={2} spacing="md" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <SimpleGrid cols={2} spacing="sm" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
       
-        <Grid gutter="md">
+        <Grid gutter="md" mr={10}>
           <Grid.Col>
-            {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={true} /> */}
-            <h1>{post.userName}</h1>
-          </Grid.Col>
-          <Grid.Col>
-            {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={true} /> */}
-            <p>{post.title}</p>
-          </Grid.Col>
-          <Grid.Col >
-            {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} /> */}
-            <p>{post.category}</p>
-          </Grid.Col>
-          <Grid.Col >
-            {/* <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} /> */}
-            <p>{post.content}</p>
+            <Title order={3} className={classes.title}>
+              @{post.userName}
+            </Title>
+
+            <Text className={classes.category} size="m">
+              {post.title} - {post.category}
+           </Text>
+            <Text fw={300} fz="lg" mt={50} className={classes.content}>
+              {post.content}
+            </Text>
           </Grid.Col>
           
           { owner &&
-            <Grid.Col span={2}>
+            <Grid.Col span={2} >
               <Link to={"../edit/"  + post.id.toString()}>
-                    <Button variant="white" color="dark">
+                    <Button  color="dark">
                       Edit
                     </Button>
               </Link>
@@ -52,11 +90,12 @@ const PostDetailsPage = () => {
           
           <Grid.Col span={2}>
             <Link to={"/posts"}>
-                    <Button variant="white" color="dark">
+                    <Button variant="filled" color="cyan">
                       Go to Posts
                     </Button>
               </Link>
           </Grid.Col>
+          
         </Grid>
         <ArticleCardImage key={post.title} image={post.image} individual={true} />
       </SimpleGrid>
