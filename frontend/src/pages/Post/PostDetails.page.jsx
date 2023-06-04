@@ -55,9 +55,6 @@ const PostDetailsPage = () => {
   const { classes, theme } = useStyles();
   const {user } = useBoundStore((state) => state);
   const post = useLoaderData();
-
-  console.log(theme);
-  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
   const owner = post.userId === user.id;
 
   return (
@@ -80,7 +77,7 @@ const PostDetailsPage = () => {
           
           { owner &&
             <Grid.Col span={2} >
-              <Link to={"../edit/"  + post.id.toString()}>
+              <Link to={"../posts/edit/"  + post.id.toString()}>
                     <Button  color="dark">
                       Edit
                     </Button>

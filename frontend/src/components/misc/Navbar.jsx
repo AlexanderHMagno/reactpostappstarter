@@ -127,7 +127,7 @@ function Navbar() {
     ];
 
 
-  const [opened, { toggle, close }] = useDisclosure(true);
+  const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].label);
 
 

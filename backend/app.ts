@@ -7,6 +7,7 @@ import {
   verifyUser,
   parseToken,
   addPost,
+  editPost,
   posts,
   sleep,
 } from "./fakedb";
@@ -47,7 +48,7 @@ app.get("/api/posts", async (req, res) => {
   res.json(posts);
 });
 
-// ⭐️ TODO: Implement this yourself
+
 app.get("/api/posts/:id", (req, res) => {
   const id:number = Number(req.params.id);
   const post = posts[id - 1];
@@ -72,5 +73,12 @@ app.post("/api/posts", (req, res) => {
   addPost(incomingPost);
   res.status(200).json({ success: true });
 });
+
+app.post("/api/posts/edit", (req, res) => {
+  const incomingPost = req.body;
+  editPost(incomingPost);
+  res.status(200).json({ success: true });
+
+})
 
 app.listen(port, () => console.log("Server is running"));
