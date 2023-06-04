@@ -1,4 +1,4 @@
-import { createStyles, Paper, Text, Title, Button, rem } from "@mantine/core";
+import { createStyles, Paper, Text, Title, Button, rem, Skeleton } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
@@ -55,6 +55,16 @@ export function ArticleCardImage({ title, category, image, id, individual }) {
             </Button>
         </Link>
       }
+    </Paper>
+  );
+}
+
+
+
+export function CardSkeleton() {
+  return (
+    <Paper >
+      <Skeleton height={rem(400)}  width={rem(300)}/> 
     </Paper>
   );
 }
