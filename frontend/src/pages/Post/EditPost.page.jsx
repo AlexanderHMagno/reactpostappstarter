@@ -2,7 +2,7 @@ import { TextInput, Button, Group, Box, Container } from "@mantine/core";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { useForm } from "@mantine/form";
-import { useNavigate,useLoaderData } from "react-router-dom";
+import { useNavigate,useLoaderData, Link } from "react-router-dom";
 import useBoundStore from "../../store/Store";
 import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
 
@@ -60,6 +60,9 @@ function EditPostPage() {
         
 
         <Group position="right" mt="md">
+            <Link to={`/posts/${id}`}>
+                <Button type="button" color="gray">Back</Button>
+            </Link>
           <Button type="submit">Update</Button>
         </Group>
       </form>
