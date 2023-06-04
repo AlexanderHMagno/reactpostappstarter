@@ -101,7 +101,7 @@ function Navbar() {
       {
         label: "Home",
         link: "/",
-        visible: true,
+        visible: !user,
       },
       {
         label: "Posts",
@@ -157,7 +157,7 @@ function Navbar() {
   );
 
   return (
-    <Header height={HEADER_HEIGHT} mb={150} className={classes.root}>
+    <Header height={HEADER_HEIGHT} mb={user?150:0} className={classes.root}>
       <Container className={classes.header}>
         <MantineLogo size={28} />
         <Group spacing={5} className={classes.links}>

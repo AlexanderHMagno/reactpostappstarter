@@ -7,6 +7,7 @@ export interface IDecodedUser {
 const users = [
   { id: 1, email: "john123@gmail.com", password: "123" },
   { id: 2, email: "sandra123@gmail.com", password: "123" },
+  { id: 3, email: "alex123@gmail.com", password: "123" },
 ];
 
 export const posts = [
