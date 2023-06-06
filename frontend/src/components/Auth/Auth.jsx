@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import useBoundStore from "../../store/Store";
 import jwtDecode from "jwt-decode";
 import { setSession, getAccessToken } from "../../services/jwt.service";
+import { Loader } from '@mantine/core';
 
 const Auth = ({ children }) => {
   const { loginWithToken, tokenLoading, logoutService } = useBoundStore(
@@ -34,7 +35,7 @@ const Auth = ({ children }) => {
     handleAuthentication();
   }, []);
 
-  return <div>{tokenLoading ? "Loading..." : children}</div>;
+  return <div>{tokenLoading ? <Loader size={48}/>: children}</div>;
 };
 
 export default Auth;

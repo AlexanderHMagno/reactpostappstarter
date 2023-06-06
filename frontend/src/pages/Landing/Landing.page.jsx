@@ -1,6 +1,7 @@
 import { createStyles, Container, Text, Button, Group, rem } from '@mantine/core';
 import { GithubIcon } from '@mantine/ds';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import useBoundStore from "../../store/Store";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -68,6 +69,9 @@ const useStyles = createStyles((theme) => ({
 
 export default function Landing() {
   const { classes } = useStyles();
+  const {user} = useBoundStore();
+
+  
 
   return (
     <div className={classes.wrapper}>

@@ -73,7 +73,11 @@ export const Router = () => {
           }
           loader={postDetailsLoader}
         />
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={
+            <ProtectedRoute isAllowed={!authCheck} redirectPath="/posts">
+              <Landing/>
+            </ProtectedRoute>
+        } />
         <Route path="*" element={<NotFound />} />
       </Route>
     )

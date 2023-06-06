@@ -15,7 +15,7 @@ export const PostPage = () => {
       <SimpleGrid cols={3}>
 
       <React.Suspense
-        fallback={<><CardSkeleton/><CardSkeleton/></>}
+        fallback={<><CardSkeleton/><CardSkeleton/><CardSkeleton/></>}
       >
         <Await
           resolve={data.posts}

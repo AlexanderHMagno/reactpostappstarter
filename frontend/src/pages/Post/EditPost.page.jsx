@@ -2,7 +2,7 @@ import { TextInput, Button, Group, Box, Container } from "@mantine/core";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { useForm } from "@mantine/form";
-import { useNavigate,useLoaderData, Link } from "react-router-dom";
+import { useNavigate,useLoaderData, Link, Navigate } from "react-router-dom";
 import useBoundStore from "../../store/Store";
 import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
 
@@ -12,7 +12,7 @@ function EditPostPage() {
   const {user } = useBoundStore((state) => state);
   const post = useLoaderData();
 
-  const {title,id} = post;
+  const {userId,id} = post;
 
   const form = useForm({
     initialValues: {...post},
@@ -26,8 +26,14 @@ function EditPostPage() {
     }
   };
 
+  //Not allowed 
+
+  if(userId !== user.id) {
+    return <Navigate to={`/notAllowed`} />
+  }
+
   return (
-    <Box maw={300} mx="auto">
+    <Box maw={300}  mx="auto">
       <form onSubmit={form.onSubmit(handleSubmit)}>
       <Container my="md"    >
             <div>
