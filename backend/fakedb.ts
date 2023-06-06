@@ -39,8 +39,10 @@ export const addPost = (post: any) => {
 
 export const editPost = (post:any) => {
     const {id} = post;
-    if(id) posts[id - 1] = post;
     
+    if(posts.length >= id) {
+      if(id) posts[id - 1] = post;
+    }
 }
 
 export const verifyUser = (email: string, password: string) => {

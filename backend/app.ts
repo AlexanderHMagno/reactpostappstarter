@@ -52,6 +52,11 @@ app.get("/api/posts", async (req, res) => {
 
 app.get("/api/posts/:id", (req, res) => {
   const id:number = Number(req.params.id);
+
+  if(posts.length < id) {
+    return res.json({message:"Incorrect Id"});
+  }
+  
   const post = posts[id - 1];
   const userData = findUserById(post.userId);
   const userName = userData.email.split("@")[0];

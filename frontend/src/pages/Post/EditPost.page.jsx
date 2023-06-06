@@ -1,4 +1,4 @@
-import { TextInput, Button, Group, Box, Container } from "@mantine/core";
+import { TextInput, Button, Group, Box, Container, SimpleGrid, Grid, Text } from "@mantine/core";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
 import { useForm } from "@mantine/form";
@@ -11,9 +11,9 @@ function EditPostPage() {
   const navigate = useNavigate();
   const {user } = useBoundStore((state) => state);
   const post = useLoaderData();
-
   const {userId,id} = post;
 
+  console.log(post);
   const form = useForm({
     initialValues: {...post},
   });
@@ -33,51 +33,65 @@ function EditPostPage() {
   }
 
   return (
-    <Box maw={300}  mx="auto">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-      <Container my="md"    >
-            <div>
-                <TextInput
-                label="Title"
-                placeholder="Enter a Title"
-                {...form.getInputProps("title")}
-                />
 
-                <TextInput
-                label="Category"
-                placeholder="Enter a Category"
-                {...form.getInputProps("category")}
-                />
-                <TextInput
-                label="Image"
-                placeholder="Enter an Image"
-                {...form.getInputProps("image")}
-                />
+    <Container my="md">
+    <SimpleGrid cols={2} spacing="sm" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <Grid  align="center" justify="center"  >
+      <Box w={350}  >
+        <Text mb={50} mt={-30} size={40} component="h2" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} >
+          Edit Post
+        </Text>{' '}
+          <form onSubmit={form.onSubmit(handleSubmit)}>
+          <TextInput
+            label="Title"
+            placeholder="Enter a Title"
+            {...form.getInputProps("title")}
+          />
 
-                <TextInput
-                label="Content"
-                placeholder="Enter some content"
-                {...form.getInputProps("content")}
-                />
-            </div>
-            {/* <ArticleCardImage image={form.getInputProps("image")} individual={true} /> */}
-        </Container>
+          <TextInput
+            label="Category"
+            placeholder="Enter a Category"
+            {...form.getInputProps("category")}
+          />
+          <TextInput
+            label="Image"
+            placeholder="Enter an Image"
+            {...form.getInputProps("image")}
+          />
 
-        
+          <TextInput
+            label="Content"
+            placeholder="Enter some content"
+            {...form.getInputProps("content")}
+          />
 
-        <Group position="right" mt="md">
+          <Group position="right" mt="md">
             <Link to={`/posts/${id}`}>
                 <Button type="button" color="gray">Back</Button>
             </Link>
           <Button type="submit">Update</Button>
         </Group>
-      </form>
-    </Box>
+        </form>
+        </Box>
+      </Grid>
+
+      <Box w={320}> 
+        <ArticleCardImage 
+          title={form.getInputProps("title").value} 
+          image={form.getInputProps("image").value} 
+          category={form.getInputProps("category").value} 
+          individual={true} />
+      </Box>
+
+    </SimpleGrid>
+  </Container>
+
   );
 }
 
 
 export const postDetailsLoader = async ({ params }) => {
+  console.log(params)
     const res = await axios.get(`${DOMAIN}/api/posts/${params.id}`);
     return res.data;
   };
