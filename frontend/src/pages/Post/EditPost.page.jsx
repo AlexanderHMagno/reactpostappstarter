@@ -12,8 +12,6 @@ function EditPostPage() {
   const {user } = useBoundStore((state) => state);
   const post = useLoaderData();
   const {userId,id} = post;
-
-  console.log(post);
   const form = useForm({
     initialValues: {...post},
   });
@@ -90,11 +88,5 @@ function EditPostPage() {
 }
 
 
-export const postDetailsLoader = async ({ params }) => {
-  console.log(params)
-    const res = await axios.get(`${DOMAIN}/api/posts/${params.id}`);
-    return res.data;
-  };
-  
 
 export default EditPostPage;

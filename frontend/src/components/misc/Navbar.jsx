@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import useBoundStore from "../../store/Store";
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantine/ds';
+import { Text } from '@mantine/core';
 import {SwitchToggle} from "./ToogleMode";
 import {
   createStyles,
@@ -159,7 +159,9 @@ function Navbar() {
   return (
     <Header height={HEADER_HEIGHT} mb={user?150:0} className={classes.root}>
       <Container className={classes.header}>
-        <MantineLogo size={28} />
+        <Text  fw={600} component="h1" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }}>
+          LOGO
+        </Text>
         <Group spacing={5} className={classes.links}>
           {items}
           <SwitchToggle/>

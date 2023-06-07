@@ -4,7 +4,7 @@ import axios from "axios";
 import { useLoaderData, Link } from "react-router-dom";
 
 import useBoundStore from "../../store/Store";
-import { Container, Grid, SimpleGrid, Skeleton, useMantineTheme, rem, createStyles, Button,  Text, Title  } from '@mantine/core';
+import { Container, Grid, SimpleGrid, rem, createStyles, Button,  Text, Title  } from '@mantine/core';
 
 
 const useStyles = createStyles((theme) => ({

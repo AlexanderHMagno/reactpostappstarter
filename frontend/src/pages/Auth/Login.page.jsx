@@ -47,10 +47,10 @@ const LoginPage = () => {
         Welcome back!
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?{' '}
+        {/* Do not have an account yet?{' '}
         <Anchor size="sm" component="button">
           Create account
-        </Anchor>
+        </Anchor> */}
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
@@ -59,7 +59,7 @@ const LoginPage = () => {
         <Group position="apart" mt="lg">
           <Checkbox label="Remember me" />
           <Anchor component="button" size="sm">
-            Forgot password?
+            {/* Forgot password? */}
           </Anchor>
         </Group>
         <Button fullWidth mt="xl" onClick={onLogin}>

@@ -33,6 +33,7 @@ export function ArticleCardImage({ title, category, image, id, individual }) {
   const { classes } = useStyles();
   return (
     <Paper
+    withBorder
       shadow="md"
       p="xl"
       radius="md"
