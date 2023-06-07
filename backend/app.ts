@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction , Request, Response} from "express";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import {
@@ -11,6 +11,7 @@ import {
   posts,
   sleep,
 } from "./fakedb";
+import {protectRoute} from "./middleware";
 
 const port = 8085;
 const app = express();
@@ -43,7 +44,7 @@ app.post("/api/user/validation", (req, res) => {
   }
 });
 
-app.get("/api/posts", async (req, res) => {
+app.get("/api/posts", protectRoute, async (req, res) => {
   // Sleep delay goes here
   await sleep(1000);
   res.json(posts);
@@ -56,7 +57,7 @@ app.get("/api/posts/:id", (req, res) => {
   if(posts.length < id) {
     return res.json({message:"Incorrect Id"});
   }
-  
+
   const post = posts[id - 1];
   const userData = findUserById(post.userId);
   const userName = userData.email.split("@")[0];
@@ -74,7 +75,8 @@ app.get("/api/posts/:id", (req, res) => {
  *     What if you make a request to this route with a valid token but
  *     with an empty/incorrect payload (post)
  */
-app.post("/api/posts", (req, res) => {
+app.post("/api/posts", protectRoute,  (req, res) => {
+
   const incomingPost = req.body;
   addPost(incomingPost);
   res.status(200).json({ success: true });

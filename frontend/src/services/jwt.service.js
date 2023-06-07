@@ -12,3 +12,15 @@ export const setSession = (token) => {
 export const getAccessToken = () => {
   return window.localStorage.getItem("jwt_access_token");
 };
+
+
+//Using Axios interceptor if you receive a 403 error remove session;
+axios.interceptors.response.use(response => {
+  return response;
+}, error => {
+ if (error.response.status === 403) {
+    setSession(null);
+    location.reload();    
+ }
+ return error;
+});

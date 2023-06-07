@@ -2,6 +2,7 @@ import { Response } from "express";
 
 export interface IDecodedUser {
   id: number;
+  exp: number;
 }
 
 const users = [
