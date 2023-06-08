@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TextInput, Button, Group, Box, Text, Container, SimpleGrid, Grid } from "@mantine/core";
 import DOMAIN from "../../services/endpoint";
 import axios from "axios";
@@ -8,6 +9,7 @@ import { ArticleCardImage } from "../../components/misc/ArticleCardImage";
 
 function CreatePostPage() {
   const {user } = useBoundStore((state) => state);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const form = useForm({
@@ -22,9 +24,11 @@ function CreatePostPage() {
 
   const handleSubmit = async (values) => {
     const res = await axios.post(`${DOMAIN}/api/posts`, values);
-    if (res?.data.success) {
+    if(res?.response?.data) {
+      setError(res.response.data.message);
+    } else if (res?.data.success) {
       navigate("/posts");
-    }
+    } 
   };
 
   return (
@@ -35,7 +39,10 @@ function CreatePostPage() {
           <Text mb={50} mt={-30} size={40} component="h2" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} >
             Create Post
           </Text>{' '}
-            <form onSubmit={form.onSubmit(handleSubmit)}>
+          <Text color="red">
+            {error}
+          </Text>
+          <form onSubmit={form.onSubmit(handleSubmit)}>
             <TextInput
               label="Title"
               placeholder="Enter a Title"

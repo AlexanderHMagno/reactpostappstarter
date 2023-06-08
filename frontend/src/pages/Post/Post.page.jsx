@@ -25,7 +25,7 @@ export const PostPage = () => {
         >
           {(posts) => (
               posts.map((post) => (
-                <ArticleCardImage key={post.title} {...post} />
+                <ArticleCardImage key={post.id} {...post} />
               ))
           )}
         </Await>

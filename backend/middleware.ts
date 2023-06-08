@@ -14,3 +14,17 @@ export const protectRoute = (req: Request, res: Response, next: NextFunction) =>
         next();
       }
   }
+
+/**
+ * Validate Payload is completed
+ */
+export const validPayload = (req: Request, res: Response, next: NextFunction) => {
+    const Payload = req.body;
+
+    const { title, category, image, content, userId} = Payload;
+    if(title && category && image) {
+        next();
+    } else {
+        res.status(400).json({message: "Missing information: Title, Category and Image are required", success: 0});
+    }    
+}

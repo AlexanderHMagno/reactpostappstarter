@@ -11,7 +11,7 @@ import {
   posts,
   sleep,
 } from "./fakedb";
-import {protectRoute} from "./middleware";
+import {protectRoute, validPayload} from "./middleware";
 
 const port = 8085;
 const app = express();
@@ -75,14 +75,14 @@ app.get("/api/posts/:id", (req, res) => {
  *     What if you make a request to this route with a valid token but
  *     with an empty/incorrect payload (post)
  */
-app.post("/api/posts", protectRoute,  (req, res) => {
+app.post("/api/posts", [protectRoute, validPayload],  (req:Request, res:Response) => {
 
   const incomingPost = req.body;
   addPost(incomingPost);
   res.status(200).json({ success: true });
 });
 
-app.post("/api/posts/edit", (req, res) => {
+app.post("/api/posts/edit",validPayload, (req, res) => {
   const incomingPost = req.body;
   editPost(incomingPost);
   res.status(200).json({ success: true });
